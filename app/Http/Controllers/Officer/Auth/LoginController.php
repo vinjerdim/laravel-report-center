@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Officer\Auth;
 
-use Brackets\AdminAuth\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;

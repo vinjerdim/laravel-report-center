@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Officer;
 
-use Brackets\AdminAuth\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\View\View;
