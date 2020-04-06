@@ -91,6 +91,7 @@ class FillDefaultOfficerAndPermissions extends Migration
                 'username' => 'apapun',
                 'password' => Hash::make($this->password),
                 'phone' => '081234567890',
+                'remember_token' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'roles' => [

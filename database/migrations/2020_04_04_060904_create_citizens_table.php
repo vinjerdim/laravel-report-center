@@ -20,6 +20,7 @@ class CreateCitizensTable extends Migration
             $table->string('password');
             $table->string('email');
             $table->string('phone', 20);
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
