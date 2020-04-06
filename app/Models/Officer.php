@@ -9,7 +9,6 @@ use Brackets\Media\HasMedia\AutoProcessMediaTrait;
 use Brackets\Media\HasMedia\HasMediaCollectionsTrait;
 use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
-use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -135,4 +134,13 @@ class Officer extends Authenticatable implements CanActivateContract, HasMedia
     }
 
     /* ************************ RELATIONS ************************ */
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+
+    public function reports()
+    {
+        return $this->hasManyThrough('App\Models\Report', 'App\Models\Reply');
+    }
 }
