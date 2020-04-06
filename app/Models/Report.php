@@ -15,18 +15,18 @@ class Report extends Model
         'picture_url',
         'status',
         'citizen_id',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'report_time',
         'deleted_at',
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
@@ -34,5 +34,15 @@ class Report extends Model
     public function getResourceUrlAttribute()
     {
         return url('/admin/reports/'.$this->getKey());
+    }
+
+    public function citizen()
+    {
+        return $this->belongsTo('App\Models\Citizen');
+    }
+
+    public function reply()
+    {
+        return $this->hasOne('App\Models\Report');
     }
 }
