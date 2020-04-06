@@ -134,6 +134,7 @@ class Officer extends Authenticatable implements CanActivateContract, HasMedia
     }
 
     /* ************************ RELATIONS ************************ */
+
     public function replies()
     {
         return $this->hasMany('App\Models\Reply');

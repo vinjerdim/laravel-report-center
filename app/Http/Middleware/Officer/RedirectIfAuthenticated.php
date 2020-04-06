@@ -42,7 +42,7 @@ class RedirectIfAuthenticated
             if ($guard === $this->guard) {
                 return redirect(config('officer-auth.login_redirect'));
             } else {
-                return redirect('/officer/login');
+                return redirect('/' . $guard . '/login');
             }
         }
 

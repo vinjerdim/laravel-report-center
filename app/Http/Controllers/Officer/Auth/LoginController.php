@@ -55,7 +55,11 @@ class LoginController extends Controller
         $this->guard = config('officer-auth.defaults.guard');
         $this->redirectTo = config('officer-auth.login_redirect');
         $this->redirectToAfterLogout = config('officer-auth.logout_redirect');
-        $this->middleware('guest.officer:' . $this->guard)->except('logout');
+        $this->middleware([
+            'guest.officer:' . 'admin',
+            'guest.officer:' . 'officer',
+            'guest.officer:' . 'citizen'
+        ])->except('logout');
     }
 
     /**
