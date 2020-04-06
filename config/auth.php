@@ -46,6 +46,11 @@ return [
             'provider' => 'officers',
         ],
 
+        'citizen' => [
+            'driver' => 'session',
+            'provider' => 'citizens',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -84,6 +89,11 @@ return [
         'officers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Officer::class,
+        ],
+
+        'citizens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Citizen::class,
         ],
 
         'users' => [
