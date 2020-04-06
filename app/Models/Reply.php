@@ -44,9 +44,4 @@ class Reply extends Model
     {
         return $this->belongsTo('App\Models\Report');
     }
-
-    public function citizen()
-    {
-        return $this->hasOneThrough('App\Models\Citizen', 'App\Models\Report');
-    }
 }
