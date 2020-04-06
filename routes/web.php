@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 /* Auto-generated admin routes */
