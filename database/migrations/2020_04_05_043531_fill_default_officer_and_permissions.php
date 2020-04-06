@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class FillDefaultOfficerUserAndPermissions extends Migration
+class FillDefaultOfficerAndPermissions extends Migration
 {
     /**
      * @var Repository|mixed
