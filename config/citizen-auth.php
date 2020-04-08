@@ -4,14 +4,14 @@ return [
 
     /*
     |
-    | This option controls which defaults are used for officers
+    | This option controls which defaults are used for citizens
     |
     */
 
     'defaults' => [
-        'guard' => 'officer',
-        'passwords' => 'officers',
-        'activations' => 'officers',
+        'guard' => 'citizen',
+        'passwords' => 'citizens',
+        'activations' => 'citizens',
     ],
 
     /*
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'login_redirect' => '/officer',
+    'login_redirect' => '/citizen',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'logout_redirect' => '/officer/login',
+    'logout_redirect' => '/citizen/login',
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'password_reset_redirect' => '/officer/login',
+    'password_reset_redirect' => '/citizen/login',
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'activation_redirect' => '/officer/login',
+    'activation_redirect' => '/citizen/login',
 
     /*
     |
