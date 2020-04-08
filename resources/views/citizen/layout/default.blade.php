@@ -1,15 +1,15 @@
-@extends('brackets/admin-ui::admin.layout.master')
+@extends('citizen.layout.master')
 
 @section('header')
-    @include('brackets/admin-ui::admin.partials.header')
+    @include('citizen.partials.header')
 @endsection
 
 @section('content')
 
     <div class="app-body">
 
-        @if(View::exists('admin.layout.sidebar'))
-            @include('admin.layout.sidebar')
+        @if(View::exists('citizen.layout.sidebar'))
+            @include('citizen.layout.sidebar')
         @endif
 
         <main class="main">
@@ -29,7 +29,7 @@
 @endsection
 
 @section('footer')
-    @include('brackets/admin-ui::admin.partials.footer')
+    @include('citizen.partials.footer')
 @endsection
 
 @section('bottom-scripts')
