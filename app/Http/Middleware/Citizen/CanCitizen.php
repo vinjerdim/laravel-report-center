@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\UnauthorizedException;
 
 /**
- * Class CanOfficer
+ * Class CanCitizen
  *
  * @package App\Http\Middleware\Citizen
  */
-class CanOfficer
+class CanCitizen
 {
     /**
      * Guard used for citizen

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\UnauthorizedException;
 
 /**
- * Class CanAdmin
+ * Class CanOfficer
  *
- * @package Brackets\AdminAuth\Http\Middleware
+ * @package App\Http\Middleware\Officer
  */
 class CanOfficer
 {
@@ -22,7 +22,7 @@ class CanOfficer
     protected $guard = 'officer';
 
     /**
-     * CanAdmin constructor.
+     * CanOfficer constructor.
      */
     public function __construct()
     {
