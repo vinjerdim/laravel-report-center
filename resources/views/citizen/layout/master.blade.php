@@ -12,7 +12,7 @@
 	{{-- TODO translatable suffix --}}
     <title>@yield('title', 'Craftable') - {{ trans('brackets/admin-ui::admin.page_title_suffix') }}</title>
 
-	@include('brackets/admin-ui::admin.partials.main-styles')
+	@include('citizen.partials.main-styles')
 
     @yield('styles')
 
@@ -25,8 +25,10 @@
 
     @yield('footer')
 
-    @include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
-    @include('brackets/admin-ui::admin.partials.main-bottom-scripts')
+    @include('citizen.partials.wysiwyg-svgs')
+
+    @include('citizen.partials.main-bottom-scripts')
+
     @yield('bottom-scripts')
 </body>
 
