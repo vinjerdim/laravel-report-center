@@ -118,13 +118,18 @@ Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])-
     });
 });
 
-Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])->group(static function () {
-    Route::prefix('officer')->namespace('Officer')->name('officer/')->group(static function () {
-        Route::prefix('reports')->name('reports/')->group(static function () {
-            Route::get('/', 'ReportsController@index')->name('index');
-            Route::get('/{report}', 'ReportsController@show')->name('show');
-            Route::get('/{report}/edit', 'ReportsController@edit')->name('edit');
-            Route::post('/{report}', 'ReportsController@update')->name('update');
-        });
+Route::prefix('citizen')->namespace('Citizen\Auth')->group(static function () {
+    Route::get('/login', 'LoginController@showLoginForm')->name('citizen/login');
+    Route::post('/login', 'LoginController@login');
+    Route::any('/logout', 'LoginController@logout')->name('citizen/logout');
+});
+
+Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])->group(static function () {
+    Route::prefix('citizen')->namespace('Citizen')->name('citizen/')->group(static function () {
+        Route::get('/', 'CitizenHomepageController@index');
+        Route::get('/profile', 'ProfileController@editProfile')->name('edit-profile');
+        Route::post('/profile', 'ProfileController@updateProfile')->name('update-profile');
+        Route::get('/password', 'ProfileController@editPassword')->name('edit-password');
+        Route::post('/password', 'ProfileController@updatePassword')->name('update-password');
     });
 });
