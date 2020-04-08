@@ -71,20 +71,14 @@ class ProfileController extends Controller
 
         // Validate the request
         $this->validate($request, [
-            'first_name' => ['nullable', 'string'],
-            'last_name' => ['nullable', 'string'],
-            'email' => ['sometimes', 'email', Rule::unique('officers', 'username')->ignore($this->officerUser->getKey(), $this->officerUser->getKeyName()), 'string'],
-            'language' => ['sometimes', 'string'],
-
+            'name' => ['required', 'string'],
+            'phone' => ['required', 'string'],
         ]);
 
         // Sanitize input
         $sanitized = $request->only([
-            'first_name',
-            'last_name',
-            'email',
-            'language',
-
+            'name',
+            'phone',
         ]);
 
         // Update changed values Officer

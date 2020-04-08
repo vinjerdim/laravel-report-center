@@ -71,20 +71,16 @@ class ProfileController extends Controller
 
         // Validate the request
         $this->validate($request, [
-            'first_name' => ['nullable', 'string'],
-            'last_name' => ['nullable', 'string'],
-            'email' => ['sometimes', 'email', Rule::unique('citizens', 'username')->ignore($this->citizen->getKey(), $this->citizen->getKeyName()), 'string'],
-            'language' => ['sometimes', 'string'],
-
+            'name' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'email', Rule::unique('citizens', 'email')->ignore($this->citizen->getKey(), $this->citizen->getKeyName()), 'string'],
         ]);
 
         // Sanitize input
         $sanitized = $request->only([
-            'first_name',
-            'last_name',
+            'name',
+            'phone',
             'email',
-            'language',
-
         ]);
 
         // Update changed values Citizen
@@ -133,7 +129,6 @@ class ProfileController extends Controller
         // Sanitize input
         $sanitized = $request->only([
             'password',
-
         ]);
 
         //Modify input, set hashed password
