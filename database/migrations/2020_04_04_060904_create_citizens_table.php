@@ -18,7 +18,7 @@ class CreateCitizensTable extends Migration
             $table->string('name', 50);
             $table->string('username', 20)->unique();
             $table->string('password');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('phone', 20);
             $table->rememberToken();
             $table->softDeletes();

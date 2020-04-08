@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Citizen;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
@@ -14,19 +14,19 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public $adminUser;
+    public $citizen;
 
     /**
-     * Guard used for admin user
+     * Guard used for citizen
      *
      * @var string
      */
-    protected $guard = 'admin';
+    protected $guard = 'citizen';
 
     public function __construct()
     {
         // TODO add authorization
-        $this->guard = config('admin-auth.defaults.guard');
+        $this->guard = config('citizen-auth.defaults.guard');
     }
 
     /**
@@ -37,10 +37,10 @@ class ProfileController extends Controller
     protected function setUser($request)
     {
         if (empty($request->user($this->guard))) {
-            abort(404, 'Admin User not found');
+            abort(404, 'Citizen not found');
         }
 
-        $this->adminUser = $request->user($this->guard);
+        $this->citizen = $request->user($this->guard);
     }
 
     /**
@@ -53,8 +53,8 @@ class ProfileController extends Controller
     {
         $this->setUser($request);
 
-        return view('admin.profile.edit-profile', [
-            'adminUser' => $this->adminUser,
+        return view('citizen.profile.edit-profile', [
+            'citizen' => $this->citizen,
         ]);
     }
 
@@ -68,15 +68,14 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $this->setUser($request);
-        $adminUser = $this->adminUser;
 
         // Validate the request
         $this->validate($request, [
             'first_name' => ['nullable', 'string'],
             'last_name' => ['nullable', 'string'],
-            'email' => ['sometimes', 'email', Rule::unique('admin_users', 'email')->ignore($this->adminUser->getKey(), $this->adminUser->getKeyName()), 'string'],
+            'email' => ['sometimes', 'email', Rule::unique('citizens', 'username')->ignore($this->citizen->getKey(), $this->citizen->getKeyName()), 'string'],
             'language' => ['sometimes', 'string'],
-            
+
         ]);
 
         // Sanitize input
@@ -85,17 +84,17 @@ class ProfileController extends Controller
             'last_name',
             'email',
             'language',
-            
+
         ]);
 
-        // Update changed values AdminUser
-        $this->adminUser->update($sanitized);
+        // Update changed values Citizen
+        $this->citizen->update($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/profile'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('citizen/profile'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/profile');
+        return redirect('citizen/profile');
     }
 
     /**
@@ -108,8 +107,8 @@ class ProfileController extends Controller
     {
         $this->setUser($request);
 
-        return view('admin.profile.edit-password', [
-            'adminUser' => $this->adminUser,
+        return view('citizen.profile.edit-password', [
+            'citizen' => $this->citizen,
         ]);
     }
 
@@ -124,30 +123,29 @@ class ProfileController extends Controller
     public function updatePassword(Request $request)
     {
         $this->setUser($request);
-        $adminUser = $this->adminUser;
 
         // Validate the request
         $this->validate($request, [
             'password' => ['sometimes', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
-            
+
         ]);
 
         // Sanitize input
         $sanitized = $request->only([
             'password',
-            
+
         ]);
 
         //Modify input, set hashed password
         $sanitized['password'] = Hash::make($sanitized['password']);
 
-        // Update changed values AdminUser
-        $this->adminUser->update($sanitized);
+        // Update changed values Citizen
+        $this->citizen->update($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/password'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('citizen/password'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/password');
+        return redirect('citizen/password');
     }
 }

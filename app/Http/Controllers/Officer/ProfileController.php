@@ -68,7 +68,6 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $this->setUser($request);
-        $officerUser = $this->officerUser;
 
         // Validate the request
         $this->validate($request, [
@@ -124,7 +123,6 @@ class ProfileController extends Controller
     public function updatePassword(Request $request)
     {
         $this->setUser($request);
-        $officerUser = $this->officerUser;
 
         // Validate the request
         $this->validate($request, [
