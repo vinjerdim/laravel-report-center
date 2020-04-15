@@ -18,6 +18,8 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js(['resources/js/admin/admin.js'], 'public/js')
     .sass('resources/sass/admin/admin.scss', 'public/css');
 
+mix.js(['resources/js/officer/officer.js'], 'public/js');
+
 if (mix.inProduction()) {
     mix.version();
 }

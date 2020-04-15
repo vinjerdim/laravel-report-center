@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Officer;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,17 +33,21 @@ class Reply extends Model
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/replies/'.$this->getKey());
+        return [
+            'admin' => url('/admin/replies/' . $this->getKey()),
+            'officer' => url('/officer/replies/' . $this->getKey()),
+            'citizen' => url('/citizen/replies/' . $this->getKey())
+        ];
     }
 
     /* ************************ RELATIONS ************************ */
     public function officer()
     {
-        return $this->belongsTo('App\Models\Officer');
+        return $this->belongsTo(Officer::class);
     }
 
     public function report()
     {
-        return $this->belongsTo('App\Models\Report');
+        return $this->belongsTo(Report::class);
     }
 }

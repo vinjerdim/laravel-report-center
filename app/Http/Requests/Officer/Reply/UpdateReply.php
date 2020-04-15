@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Reply;
+namespace App\Http\Requests\Officer\Reply;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +15,7 @@ class UpdateReply extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.reply.edit', $this->reply);
+        return Gate::allows('officer.reply.edit', $this->reply);
     }
 
     /**
@@ -28,9 +28,9 @@ class UpdateReply extends FormRequest
         return [
             'reply_time' => ['sometimes', 'date'],
             'content' => ['sometimes', 'string'],
-            'officer_id' => ['sometimes', 'string'],
-            'report_id' => ['sometimes', 'string'],
-            
+            'officer_id' => ['sometimes', 'integer'],
+            'report_id' => ['sometimes', 'integer'],
+
         ];
     }
 

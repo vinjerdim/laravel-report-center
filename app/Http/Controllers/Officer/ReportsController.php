@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Officer;
 
+use App\Models\Citizen;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Officer\Report\IndexReport;
 use App\Http\Requests\Officer\Report\UpdateReport;
@@ -36,6 +37,10 @@ class ReportsController extends Controller
             ['id', 'title', 'content', 'picture_url', 'status']
         );
 
+        foreach ($data as $report) {
+            $report['citizen'] = $report->citizen;
+        }
+
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -60,9 +65,6 @@ class ReportsController extends Controller
         $this->authorize('officer.report.show', $report);
 
         // TODO your code goes here
-        return view('officer.report.show', [
-            'report' => $report,
-        ]);
     }
 
     /**
@@ -76,9 +78,10 @@ class ReportsController extends Controller
     {
         $this->authorize('officer.report.edit', $report);
 
+        $report['citizen'] = $report->citizen;
 
         return view('officer.report.edit', [
-            'report' => $report,
+            'report' => $report
         ]);
     }
 
@@ -93,6 +96,7 @@ class ReportsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['citizen_id'] = $request->getCitizenId();
 
         // Update changed values Report
         $report->update($sanitized);

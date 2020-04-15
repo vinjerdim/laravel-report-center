@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Reply;
 use Brackets\AdminAuth\Activation\Contracts\CanActivate as CanActivateContract;
 use Brackets\AdminAuth\Activation\Traits\CanActivate;
 use Brackets\AdminAuth\Notifications\ResetPassword;
@@ -137,6 +138,6 @@ class Officer extends Authenticatable implements CanActivateContract, HasMedia
 
     public function replies()
     {
-        return $this->hasMany('App\Models\Reply');
+        return $this->hasMany(Reply::class);
     }
 }

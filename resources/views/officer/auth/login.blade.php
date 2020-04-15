@@ -42,9 +42,6 @@
 										<input type="hidden" name="remember" value="1">
 										<button type="submit" class="btn btn-primary btn-block btn-spinner"><i class="fa"></i> Login </button>
 									</div>
-									<div class="form-group text-center">
-										<a href="{{ url('/officer/password-reset') }}" class="auth-ghost-link"> Forgot Password? </a>
-									</div>
 								</div>
 							</form>
 						</auth-form>

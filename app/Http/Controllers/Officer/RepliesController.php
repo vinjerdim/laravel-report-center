@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Officer;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Reply\BulkDestroyReply;
-use App\Http\Requests\Admin\Reply\DestroyReply;
-use App\Http\Requests\Admin\Reply\IndexReply;
-use App\Http\Requests\Admin\Reply\StoreReply;
-use App\Http\Requests\Admin\Reply\UpdateReply;
+use App\Http\Requests\Officer\Reply\BulkDestroyReply;
+use App\Http\Requests\Officer\Reply\DestroyReply;
+use App\Http\Requests\Officer\Reply\IndexReply;
+use App\Http\Requests\Officer\Reply\StoreReply;
+use App\Http\Requests\Officer\Reply\UpdateReply;
 use App\Models\Reply;
 use Brackets\AdminListing\Facades\AdminListing;
 use Carbon\Carbon;
@@ -18,6 +18,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -38,11 +39,16 @@ class RepliesController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'reply_time', 'officer_id', 'report_id'],
+            ['id', 'reply_time', 'content', 'officer_id', 'report_id'],
 
             // set columns to searchIn
             ['id', 'content']
         );
+
+        foreach ($data as $reply) {
+            $reply['officer'] = $reply->officer;
+            $reply['report'] = $reply->report;
+        }
 
         if ($request->ajax()) {
             if ($request->has('bulk')) {
@@ -53,7 +59,7 @@ class RepliesController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.reply.index', ['data' => $data]);
+        return view('officer.reply.index', ['data' => $data]);
     }
 
     /**
@@ -64,9 +70,14 @@ class RepliesController extends Controller
      */
     public function create()
     {
-        $this->authorize('admin.reply.create');
+        $this->authorize('officer.reply.create');
 
-        return view('admin.reply.create');
+        $reply = new Reply();
+        $reply['officer'] = Auth::user();
+
+        return view('officer.reply.create', [
+            'reply' => $reply,
+        ]);
     }
 
     /**
@@ -84,10 +95,12 @@ class RepliesController extends Controller
         $reply = Reply::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/replies'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return [
+                'redirect' => url('officer/replies'),
+                'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/replies');
+        return redirect('officer/replies');
     }
 
     /**
@@ -99,7 +112,7 @@ class RepliesController extends Controller
      */
     public function show(Reply $reply)
     {
-        $this->authorize('admin.reply.show', $reply);
+        $this->authorize('officer.reply.show', $reply);
 
         // TODO your code goes here
     }
@@ -113,10 +126,12 @@ class RepliesController extends Controller
      */
     public function edit(Reply $reply)
     {
-        $this->authorize('admin.reply.edit', $reply);
+        $this->authorize('officer.reply.edit', $reply);
 
+        $reply['officer'] = $reply->officer;
+        $reply['report'] = $reply->report;
 
-        return view('admin.reply.edit', [
+        return view('officer.reply.edit', [
             'reply' => $reply,
         ]);
     }
@@ -138,12 +153,12 @@ class RepliesController extends Controller
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/replies'),
+                'redirect' => url('officer/replies'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/replies');
+        return redirect('officer/replies');
     }
 
     /**
@@ -159,7 +174,9 @@ class RepliesController extends Controller
         $reply->delete();
 
         if ($request->ajax()) {
-            return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+            return response([
+                'message' => trans('brackets/admin-ui::admin.operation.succeeded')
+            ]);
         }
 
         return redirect()->back();
@@ -187,6 +204,8 @@ class RepliesController extends Controller
                 });
         });
 
-        return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+        return response([
+            'message' => trans('brackets/admin-ui::admin.operation.succeeded')
+        ]);
     }
 }

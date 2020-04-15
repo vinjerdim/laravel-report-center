@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Reply;
+namespace App\Http\Requests\Officer\Reply;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +14,7 @@ class DestroyReply extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.reply.delete', $this->reply);
+        return Gate::allows('officer.reply.delete', $this->reply);
     }
 
     /**

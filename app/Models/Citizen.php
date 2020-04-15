@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Reply;
+use App\Models\Report;
 use Brackets\AdminAuth\Activation\Contracts\CanActivate as CanActivateContract;
 use Brackets\AdminAuth\Activation\Traits\CanActivate;
 use Brackets\AdminAuth\Notifications\ResetPassword;
@@ -136,11 +138,11 @@ class Citizen extends Authenticatable implements CanActivateContract, HasMedia
     /* ************************ RELATIONS ************************ */
     public function reports()
     {
-        return $this->hasMany('App\Models\Report');
+        return $this->hasMany(Report::class);
     }
 
     public function replies()
     {
-        return $this->hasManyThrough('App\Models\Reply', 'App\Models\Report');
+        return $this->hasManyThrough(Reply::class, Report::class);
     }
 }

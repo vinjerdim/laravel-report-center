@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Reply;
+namespace App\Http\Requests\Officer\Reply;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +14,7 @@ class BulkDestroyReply extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.reply.bulk-delete');
+        return Gate::allows('officer.reply.bulk-delete');
     }
 
     /**

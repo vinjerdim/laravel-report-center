@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Reply;
+namespace App\Http\Requests\Officer\Reply;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +15,7 @@ class StoreReply extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.reply.create');
+        return Gate::allows('officer.reply.create');
     }
 
     /**
@@ -30,7 +30,7 @@ class StoreReply extends FormRequest
             'content' => ['required', 'string'],
             'officer_id' => ['required', 'string'],
             'report_id' => ['required', 'string'],
-            
+
         ];
     }
 

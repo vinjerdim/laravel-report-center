@@ -44,8 +44,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('citizens')->name('citizens/')->group(static function() {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('citizens')->name('citizens/')->group(static function () {
             Route::get('/',                                             'CitizensController@index')->name('index');
             Route::get('/create',                                       'CitizensController@create')->name('create');
             Route::post('/',                                            'CitizensController@store')->name('store');
@@ -59,8 +59,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('officers')->name('officers/')->group(static function() {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('officers')->name('officers/')->group(static function () {
             Route::get('/',                                             'OfficersController@index')->name('index');
             Route::get('/create',                                       'OfficersController@create')->name('create');
             Route::post('/',                                            'OfficersController@store')->name('store');
@@ -131,5 +131,29 @@ Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])-
         Route::post('/profile', 'ProfileController@updateProfile')->name('update-profile');
         Route::get('/password', 'ProfileController@editPassword')->name('edit-password');
         Route::post('/password', 'ProfileController@updatePassword')->name('update-password');
+    });
+});
+
+Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])->group(static function () {
+    Route::prefix('officer')->namespace('Officer')->name('officer/')->group(static function () {
+        Route::prefix('reports')->name('reports/')->group(static function () {
+            Route::get('/', 'ReportsController@index')->name('index');
+            Route::get('/{report}/edit', 'ReportsController@edit')->name('edit');
+            Route::post('/{report}', 'ReportsController@update')->name('update');
+        });
+    });
+});
+
+Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])->group(static function () {
+    Route::prefix('officer')->namespace('Officer')->name('officer/')->group(static function () {
+        Route::prefix('replies')->name('replies/')->group(static function () {
+            Route::get('/', 'RepliesController@index')->name('index');
+            Route::get('/create', 'RepliesController@create')->name('create');
+            Route::post('/', 'RepliesController@store')->name('store');
+            Route::get('/{reply}/edit', 'RepliesController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'RepliesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{reply}', 'RepliesController@update')->name('update');
+            Route::delete('/{reply}', 'RepliesController@destroy')->name('destroy');
+        });
     });
 });

@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 	{{-- TODO translatable suffix --}}
-    <title>Officer Page</title>
+    <title>@yield('title', 'Officer Page')</title>
 
 	@include('officer.partials.main-styles')
 
