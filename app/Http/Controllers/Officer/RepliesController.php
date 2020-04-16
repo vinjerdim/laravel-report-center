@@ -9,6 +9,7 @@ use App\Http\Requests\Officer\Reply\IndexReply;
 use App\Http\Requests\Officer\Reply\StoreReply;
 use App\Http\Requests\Officer\Reply\UpdateReply;
 use App\Models\Reply;
+use App\Models\Report;
 use Brackets\AdminListing\Facades\AdminListing;
 use Carbon\Carbon;
 use Exception;
@@ -18,7 +19,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -46,7 +46,6 @@ class RepliesController extends Controller
         );
 
         foreach ($data as $reply) {
-            $reply['officer'] = $reply->officer;
             $reply['report'] = $reply->report;
         }
 
@@ -68,16 +67,17 @@ class RepliesController extends Controller
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function create()
+    public function create(Report $report)
     {
         $this->authorize('officer.reply.create');
 
         $reply = new Reply();
-        $reply['officer'] = Auth::user();
+        $reply->report_id = $report->id;
 
-        return view('officer.reply.create', [
-            'reply' => $reply,
-        ]);
+        $reply['report'] = Report::find($report->id);
+        $reply['report']['citizen'] = $reply['report']->citizen;
+
+        return view('officer.reply.create', ['reply' => $reply]);
     }
 
     /**
@@ -89,7 +89,7 @@ class RepliesController extends Controller
     public function store(StoreReply $request)
     {
         // Sanitize input
-        $sanitized = $request->getSanitized();
+        $sanitized = $request->getSanitized();;
 
         // Store the Reply
         $reply = Reply::create($sanitized);
@@ -128,8 +128,8 @@ class RepliesController extends Controller
     {
         $this->authorize('officer.reply.edit', $reply);
 
-        $reply['officer'] = $reply->officer;
         $reply['report'] = $reply->report;
+        $reply['report']['citizen'] = $reply['report']->citizen;
 
         return view('officer.reply.edit', [
             'reply' => $reply,

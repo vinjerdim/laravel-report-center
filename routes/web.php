@@ -148,7 +148,7 @@ Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])-
     Route::prefix('officer')->namespace('Officer')->name('officer/')->group(static function () {
         Route::prefix('replies')->name('replies/')->group(static function () {
             Route::get('/', 'RepliesController@index')->name('index');
-            Route::get('/create', 'RepliesController@create')->name('create');
+            Route::get('/create/{report}', 'RepliesController@create')->name('create');
             Route::post('/', 'RepliesController@store')->name('store');
             Route::get('/{reply}/edit', 'RepliesController@edit')->name('edit');
             Route::post('/bulk-destroy', 'RepliesController@bulkDestroy')->name('bulk-destroy');

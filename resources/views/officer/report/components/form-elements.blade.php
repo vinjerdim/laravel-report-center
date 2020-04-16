@@ -13,7 +13,7 @@
 
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('citizen_id'), 'has-success': fields.citizen_id && fields.citizen_id.valid }">
     <label for="citizen_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'"> Reported by </label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.citizen.name" class="form-control" :class="{'form-control-danger': errors.has('citizen_id'), 'form-control-success': fields.citizen_id && fields.citizen_id.valid}" id="citizen_name" name="citizen_name" placeholder="Citizen" disabled>
         <input type="hidden" v-model="form.citizen_id" v-validate="'required'" id="citizen_id" name="citizen_id" placeholder="Citizen">
         <div v-if="errors.has('citizen_id')" class="form-control-feedback form-text" v-cloak>
@@ -43,7 +43,8 @@
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('status'), 'has-success': fields.status && fields.status.valid }">
     <label for="status" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'"> Status </label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.status" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('status'), 'form-control-success': fields.status && fields.status.valid}" id="status" name="status" placeholder="Status">
+        <multiselect v-model="form.status" :options="status"></multiselect>
         <div v-if="errors.has('status')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('status') }}</div>
     </div>
 </div>
+

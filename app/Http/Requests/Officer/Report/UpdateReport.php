@@ -29,7 +29,6 @@ class UpdateReport extends FormRequest
             'report_time' => ['sometimes', 'date'],
             'title' => ['sometimes', 'string'],
             'content' => ['sometimes', 'string'],
-            'picture_url' => ['sometimes', 'string'],
             'status' => ['sometimes', 'string'],
             'citizen_id' => ['sometimes', 'integer'],
 
@@ -45,16 +44,8 @@ class UpdateReport extends FormRequest
     {
         $sanitized = $this->validated();
 
-
         //Add your code for manipulation with request data here
 
         return $sanitized;
-    }
-
-    public function getCitizenId() {
-        if ($this->has('citizen')) {
-            return $this->get('citizen')['id'];
-        }
-        return null;
     }
 }

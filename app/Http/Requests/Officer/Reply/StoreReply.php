@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Officer\Reply;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
@@ -26,10 +27,8 @@ class StoreReply extends FormRequest
     public function rules(): array
     {
         return [
-            'reply_time' => ['required', 'date'],
             'content' => ['required', 'string'],
-            'officer_id' => ['required', 'string'],
-            'report_id' => ['required', 'string'],
+            'report_id' => ['required', 'integer'],
 
         ];
     }
@@ -44,6 +43,7 @@ class StoreReply extends FormRequest
         $sanitized = $this->validated();
 
         //Add your code for manipulation with request data here
+        $sanitized['officer_id'] = Auth::user()->id;
 
         return $sanitized;
     }

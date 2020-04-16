@@ -19,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class CitizensController extends Controller
@@ -79,9 +80,11 @@ class CitizensController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['password'] = Hash::make($sanitized['password']);
 
         // Store the Citizen
         $citizen = Citizen::create($sanitized);
+        $citizen->assignRole('Citizen');
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/citizens'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];

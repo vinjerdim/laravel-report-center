@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="nav-title">Menu</li>
            <li class="nav-item"><a class="nav-link" href="{{ url('officer/reports') }}"><i class="nav-icon icon-drop"></i> Reports </a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('officer/replies') }}"><i class="nav-icon icon-star"></i> My Replies </a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('officer/replies') }}"><i class="nav-icon icon-star"></i> Replies </a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             {{-- Do not delete me :) I'm also used for auto-generation menu items --}}

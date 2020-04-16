@@ -78,6 +78,10 @@ class ReportsController extends Controller
     {
         $this->authorize('officer.report.edit', $report);
 
+        if ($report->status == 'verified') {
+            return redirect('officer/reports');
+        }
+
         $report['citizen'] = $report->citizen;
 
         return view('officer.report.edit', [
@@ -96,7 +100,6 @@ class ReportsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized['citizen_id'] = $request->getCitizenId();
 
         // Update changed values Report
         $report->update($sanitized);

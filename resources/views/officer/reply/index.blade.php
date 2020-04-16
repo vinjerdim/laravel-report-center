@@ -13,10 +13,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> My Replies
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('officer/replies/create') }}" role="button">
-                            <i class="fa fa-plus"></i>
-                            &nbsp; New Reply </a>
+                        <i class="fa fa-align-justify"></i> Replies
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -77,14 +74,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
+                                <tr v-for="(item, index) in collection" v-if="item.officer_id == {{ Auth::user()->id }}" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
                                         <td class="bulk-checkbox">
                                             <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
                                             <label class="form-check-label" :for="'enabled' + item.id">
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.id }}</td>
                                         <td>@{{ item.reply_time | datetime }}</td>
                                         <td>@{{ item.report.title }}</td>
 
@@ -118,11 +115,6 @@
                             <div class="no-items-found" v-if="!collection.length > 0">
                                 <i class="icon-magnifier"></i>
                                 <h3> Could not find any items </h3>
-                                <p> Try changing the filters or add a new one </p>
-                                <a class="btn btn-primary btn-spinner" href="{{ url('officer/replies/create') }}" role="button">
-                                    <i class="fa fa-plus"></i>
-                                    &nbsp; New Reply
-                                </a>
                             </div>
                         </div>
                     </div>

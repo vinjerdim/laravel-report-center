@@ -16,7 +16,8 @@ Vue.component('report-form', {
             },
             mediaWysiwygConfigDisabled: {
                 disabled: true,
-            }
+            },
+            status: ['unverified', 'in review', 'verified']
         }
     }
 

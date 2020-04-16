@@ -10,6 +10,7 @@ Vue.component('reply-form', {
                 officer_id:  '' ,
                 officer:  '' ,
                 report_id:  '' ,
+                report: ''
 
             }
         }

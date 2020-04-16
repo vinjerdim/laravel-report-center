@@ -55,13 +55,20 @@
                                         <td>@{{ item.id }}</td>
                                         <td>@{{ item.report_time | datetime }}</td>
                                         <td>@{{ item.title }}</td>
-                                        <td>@{{ item.status }}</td>
+                                        <td>
+                                            <span :class="{'badge badge-warning': item.status == 'unverified', 'badge badge-success': item.status == 'verified', 'badge badge-secondary': item.status == 'in review'}">
+                                                @{{ item.status }}
+                                            </span>
+                                        </td>
                                         <td>@{{ item.citizen.name }}</td>
 
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url.officer + '/edit'" title="Edit" role="button"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-sm btn-spinner btn-info" :class="{'disabled' : item.status == 'verified'}" :href="item.resource_url.officer + '/edit'" title="Edit" role="button"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-spinner btn-success" :class="{'disabled' : item.status != 'verified'}" :href="'replies/create/' + item.id" title="Reply" role="button"><i class="fa fa-reply"></i></a>
                                                 </div>
                                             </div>
                                         </td>
