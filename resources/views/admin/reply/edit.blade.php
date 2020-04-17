@@ -8,11 +8,11 @@
         <div class="card">
 
             <reply-form
-                :action="'{{ $reply->resource_url }}'"
+                :action="'{{ $reply->resource_url['admin'] }}'"
                 :data="{{ $reply->toJson() }}"
                 v-cloak
                 inline-template>
-            
+
                 <form class="form-horizontal form-edit" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
 
 
@@ -23,21 +23,21 @@
                     <div class="card-body">
                         @include('admin.reply.components.form-elements')
                     </div>
-                    
-                    
+
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary" :disabled="submiting">
                             <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
                             {{ trans('brackets/admin-ui::admin.btn.save') }}
                         </button>
                     </div>
-                    
+
                 </form>
 
         </reply-form>
 
         </div>
-    
+
 </div>
 
 @endsection
