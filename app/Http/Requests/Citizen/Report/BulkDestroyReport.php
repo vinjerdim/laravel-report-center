@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Report;
+namespace App\Http\Requests\Citizen\Report;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +14,7 @@ class BulkDestroyReport extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.report.bulk-delete');
+        return Gate::allows('citizen.report.bulk-delete');
     }
 
     /**

@@ -157,3 +157,17 @@ Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])-
         });
     });
 });
+
+Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])->group(static function () {
+    Route::prefix('citizen')->namespace('citizen')->name('citizen/')->group(static function () {
+        Route::prefix('reports')->name('reports/')->group(static function () {
+            Route::get('/', 'ReportsController@index')->name('index');
+            Route::get('/create', 'ReportsController@create')->name('create');
+            Route::post('/', 'ReportsController@store')->name('store');
+            Route::get('/{report}/edit', 'ReportsController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'ReportsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{report}', 'ReportsController@update')->name('update');
+            Route::delete('/{report}', 'ReportsController@destroy')->name('destroy');
+        });
+    });
+});

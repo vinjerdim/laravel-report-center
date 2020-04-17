@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Report;
+namespace App\Http\Requests\Citizen\Report;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +15,7 @@ class UpdateReport extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.report.edit', $this->report);
+        return Gate::allows('citizen.report.edit', $this->report);
     }
 
     /**
@@ -29,10 +29,8 @@ class UpdateReport extends FormRequest
             'report_time' => ['sometimes', 'date'],
             'title' => ['sometimes', 'string'],
             'content' => ['sometimes', 'string'],
-            'picture_url' => ['sometimes', 'string'],
             'status' => ['sometimes', 'string'],
-            'citizen_id' => ['sometimes', 'string'],
-            
+
         ];
     }
 

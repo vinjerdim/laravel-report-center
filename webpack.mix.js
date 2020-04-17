@@ -20,6 +20,8 @@ mix.js(['resources/js/admin/admin.js'], 'public/js')
 
 mix.js(['resources/js/officer/officer.js'], 'public/js');
 
+mix.js(['resources/js/citizen/citizen.js'], 'public/js');
+
 if (mix.inProduction()) {
     mix.version();
 }
