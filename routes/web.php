@@ -171,3 +171,11 @@ Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])-
         });
     });
 });
+
+Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])->group(static function () {
+    Route::prefix('citizen')->namespace('Citizen')->name('citizen/')->group(static function () {
+        Route::prefix('replies')->name('replies/')->group(static function () {
+            Route::get('/', 'RepliesController@index')->name('index');
+        });
+    });
+});

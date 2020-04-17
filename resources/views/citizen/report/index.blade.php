@@ -98,7 +98,7 @@
                                                     <a class="btn btn-sm btn-spinner btn-info" :class="{'disabled' : item.status != 'unverified'}" :href="item.resource_url.citizen + '/edit'" title="Edit" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>
                                                 <form class="col" @submit.prevent="deleteItem(item.resource_url.citizen)">
-                                                    <button type="submit" class="btn btn-sm btn-danger" :class="{'disabled' : item.status != 'unverified'}" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" :class="{'disabled' : item.status != 'unverified'}" title="Delete"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
                                         </td>
