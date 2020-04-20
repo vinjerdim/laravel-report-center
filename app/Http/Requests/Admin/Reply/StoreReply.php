@@ -28,9 +28,9 @@ class StoreReply extends FormRequest
         return [
             'reply_time' => ['required', 'date'],
             'content' => ['required', 'string'],
-            'officer_id' => ['required', 'string'],
-            'report_id' => ['required', 'string'],
-            
+            'officer_id' => ['required', 'integer'],
+            'report_id' => ['required', 'integer'],
+
         ];
     }
 

@@ -19,20 +19,26 @@
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('officer_id'), 'has-success': fields.officer_id && fields.officer_id.valid }">
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('officer_id')}">
     <label for="officer_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.reply.columns.officer_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.officer_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('officer_id'), 'form-control-success': fields.officer_id && fields.officer_id.valid}" id="officer_id" name="officer_id" placeholder="{{ trans('admin.reply.columns.officer_id') }}">
+            <select v-model="form.officer_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('officer_id'), 'form-control-success': fields.officer_id && fields.officer_id.valid}" id="officer_id" name="officer_id">
+                <option v-for="officer in form.officers" :value="officer.id">
+                    @{{ officer.name }}
+                </option>
+            </select>
         <div v-if="errors.has('officer_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('officer_id') }}</div>
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('report_id'), 'has-success': fields.report_id && fields.report_id.valid }">
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('report_id')}">
     <label for="report_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.reply.columns.report_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.report_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('report_id'), 'form-control-success': fields.report_id && fields.report_id.valid}" id="report_id" name="report_id" placeholder="{{ trans('admin.reply.columns.report_id') }}">
+            <select v-model="form.report_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('report_id'), 'form-control-success': fields.report_id && fields.report_id.valid}" id="report_id" name="report_id">
+                <option v-for="report in form.reports" :value="report.id">
+                    @{{ report.title }}
+                </option>
+            </select>
         <div v-if="errors.has('report_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('report_id') }}</div>
     </div>
 </div>
-
-

@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Report\DestroyReport;
 use App\Http\Requests\Admin\Report\IndexReport;
 use App\Http\Requests\Admin\Report\StoreReport;
 use App\Http\Requests\Admin\Report\UpdateReport;
+use App\Models\Citizen;
 use App\Models\Report;
 use Brackets\AdminListing\Facades\AdminListing;
 use Carbon\Carbon;
@@ -44,6 +45,10 @@ class ReportsController extends Controller
             ['id', 'title', 'content', 'picture_url', 'status']
         );
 
+        foreach($data as $report) {
+            $report['citizen'] = $report->citizen;
+        }
+
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -66,7 +71,13 @@ class ReportsController extends Controller
     {
         $this->authorize('admin.report.create');
 
-        return view('admin.report.create');
+        $citizens = Citizen::all();
+        $report = new Report();
+        $report['citizens'] = $citizens;
+
+        return view('admin.report.create', [
+            'report' => $report
+        ]);
     }
 
     /**
@@ -115,6 +126,8 @@ class ReportsController extends Controller
     {
         $this->authorize('admin.report.edit', $report);
 
+        $citizens = Citizen::all();
+        $report['citizens'] = $citizens;
 
         return view('admin.report.edit', [
             'report' => $report,

@@ -9,8 +9,10 @@ Vue.component('reply-form', {
                 content:  '' ,
                 officer_id:  '' ,
                 report_id:  '' ,
-                
-            }
+                officers: [],
+                reports: [],
+
+            },
         }
     }
 

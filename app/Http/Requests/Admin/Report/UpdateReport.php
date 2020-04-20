@@ -29,10 +29,9 @@ class UpdateReport extends FormRequest
             'report_time' => ['sometimes', 'date'],
             'title' => ['sometimes', 'string'],
             'content' => ['sometimes', 'string'],
-            'picture_url' => ['sometimes', 'string'],
             'status' => ['sometimes', 'string'],
-            'citizen_id' => ['sometimes', 'string'],
-            
+            'citizen_id' => ['sometimes', 'integer'],
+
         ];
     }
 

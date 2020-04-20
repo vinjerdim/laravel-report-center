@@ -124,8 +124,8 @@ class Report extends Model implements HasMedia
         return $this->belongsTo(Citizen::class);
     }
 
-    public function reply()
+    public function replies()
     {
-        return $this->hasOne(Reply::class);
+        return $this->hasMany(Reply::class);
     }
 }

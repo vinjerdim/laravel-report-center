@@ -1,6 +1,6 @@
 @extends('brackets/admin-ui::admin.layout.default')
 
-@section('title', trans('admin.report.actions.edit', ['name' => $report->title]))
+@section('title', 'Edit Report')
 
 @section('body')
 
@@ -17,7 +17,7 @@
 
 
                     <div class="card-header">
-                        <i class="fa fa-pencil"></i> {{ trans('admin.report.actions.edit', ['name' => $report->title]) }}
+                        <i class="fa fa-pencil"></i> Edit Report
                     </div>
 
                     <div class="card-body">

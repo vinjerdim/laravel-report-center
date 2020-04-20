@@ -52,7 +52,6 @@
                                         <th is='sortable' :column="'id'">{{ trans('admin.report.columns.id') }}</th>
                                         <th is='sortable' :column="'report_time'">{{ trans('admin.report.columns.report_time') }}</th>
                                         <th is='sortable' :column="'title'">{{ trans('admin.report.columns.title') }}</th>
-                                        <th is='sortable' :column="'picture_url'">{{ trans('admin.report.columns.picture_url') }}</th>
                                         <th is='sortable' :column="'status'">{{ trans('admin.report.columns.status') }}</th>
                                         <th is='sortable' :column="'citizen_id'">{{ trans('admin.report.columns.citizen_id') }}</th>
 
@@ -81,9 +80,12 @@
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.report_time | datetime }}</td>
                                         <td>@{{ item.title }}</td>
-                                        <td>@{{ item.picture_url }}</td>
-                                        <td>@{{ item.status }}</td>
-                                        <td>@{{ item.citizen_id }}</td>
+                                        <td>
+                                            <span :class="{'badge badge-warning': item.status == 'unverified', 'badge badge-success': item.status == 'verified', 'badge badge-secondary': item.status == 'in review'}">
+                                                @{{ item.status }}
+                                            </span>
+                                        </td>
+                                        <td>@{{ item.citizen.name }}</td>
 
                                         <td>
                                             <div class="row no-gutters">

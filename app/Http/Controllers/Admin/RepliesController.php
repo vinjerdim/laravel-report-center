@@ -8,7 +8,9 @@ use App\Http\Requests\Admin\Reply\DestroyReply;
 use App\Http\Requests\Admin\Reply\IndexReply;
 use App\Http\Requests\Admin\Reply\StoreReply;
 use App\Http\Requests\Admin\Reply\UpdateReply;
+use App\Models\Officer;
 use App\Models\Reply;
+use App\Models\Report;
 use Brackets\AdminListing\Facades\AdminListing;
 use Carbon\Carbon;
 use Exception;
@@ -44,6 +46,11 @@ class RepliesController extends Controller
             ['id', 'content']
         );
 
+        foreach($data as $reply) {
+            $reply['officer'] = $reply->officer;
+            $reply['report'] = $reply->report;
+        }
+
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -66,7 +73,15 @@ class RepliesController extends Controller
     {
         $this->authorize('admin.reply.create');
 
-        return view('admin.reply.create');
+        $officers = Officer::all();
+        $reports = Report::all();
+        $reply = new Reply();
+        $reply['officers'] = $officers;
+        $reply['reports'] = $reports;
+
+        return view('admin.reply.create', [
+            'reply' => $reply
+        ]);
     }
 
     /**
@@ -115,6 +130,10 @@ class RepliesController extends Controller
     {
         $this->authorize('admin.reply.edit', $reply);
 
+        $officers = Officer::all();
+        $reports = Report::all();
+        $reply['officers'] = $officers;
+        $reply['reports'] = $reports;
 
         return view('admin.reply.edit', [
             'reply' => $reply,

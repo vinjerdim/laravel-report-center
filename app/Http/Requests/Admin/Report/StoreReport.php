@@ -29,10 +29,9 @@ class StoreReport extends FormRequest
             'report_time' => ['required', 'date'],
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'picture_url' => ['required', 'string'],
             'status' => ['required', 'string'],
-            'citizen_id' => ['required', 'string'],
-            
+            'citizen_id' => ['required', 'integer'],
+
         ];
     }
 

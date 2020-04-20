@@ -11,8 +11,10 @@ Vue.component('report-form', {
                 picture_url:  '' ,
                 status:  '' ,
                 citizen_id:  '' ,
-                
-            }
+                citizens: []
+
+            },
+            status: ['unverified', 'in review', 'verified']
         }
     }
 

@@ -78,8 +78,8 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.reply_time | datetime }}</td>
-                                        <td>@{{ item.officer_id }}</td>
-                                        <td>@{{ item.report_id }}</td>
+                                        <td>@{{ item.officer.name }}</td>
+                                        <td>@{{ item.report ? item.report.title : '' }}</td>
 
                                         <td>
                                             <div class="row no-gutters">

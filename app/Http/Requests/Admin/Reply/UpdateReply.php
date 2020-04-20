@@ -28,9 +28,9 @@ class UpdateReply extends FormRequest
         return [
             'reply_time' => ['sometimes', 'date'],
             'content' => ['sometimes', 'string'],
-            'officer_id' => ['sometimes', 'string'],
-            'report_id' => ['sometimes', 'string'],
-            
+            'officer_id' => ['sometimes', 'integer'],
+            'report_id' => ['sometimes', 'integer'],
+
         ];
     }
 
