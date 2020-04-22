@@ -159,7 +159,7 @@ Route::middleware(['auth:' . config('officer-auth.defaults.guard'), 'officer'])-
 });
 
 Route::middleware(['auth:' . config('citizen-auth.defaults.guard'), 'citizen'])->group(static function () {
-    Route::prefix('citizen')->namespace('citizen')->name('citizen/')->group(static function () {
+    Route::prefix('citizen')->namespace('Citizen')->name('citizen/')->group(static function () {
         Route::prefix('reports')->name('reports/')->group(static function () {
             Route::get('/', 'ReportsController@index')->name('index');
             Route::get('/create', 'ReportsController@create')->name('create');
